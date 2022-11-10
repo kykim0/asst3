@@ -10,50 +10,47 @@
 
 class CudaRenderer : public CircleRenderer {
 
- private:
-  Image* image;
-  SceneName sceneName;
+private:
 
-  int numCircles;
-  int numCirclesProc;
-  int numPixels;
-  int tileWidth;
-  int tileHeight;
+    Image* image;
+    SceneName sceneName;
 
-  float* position;
-  float* velocity;
-  float* color;
-  float* radius;
+    int numCircles;
+    float* position;
+    float* velocity;
+    float* color;
+    float* radius;
 
-  float* cudaDevicePosition;
-  float* cudaDeviceVelocity;
-  float* cudaDeviceColor;
-  float* cudaDeviceRadius;
-  float* cudaDeviceImageData;
-  short* cudaDevicePixelFlag;
+    float* cudaDevicePosition;
+    float* cudaDeviceVelocity;
+    float* cudaDeviceColor;
+    float* cudaDeviceRadius;
+    float* cudaDeviceImageData;
 
- public:
-  CudaRenderer();
-  virtual ~CudaRenderer();
+public:
 
-  const Image* getImage();
+    CudaRenderer();
+    virtual ~CudaRenderer();
 
-  void setup();
+    const Image* getImage();
 
-  void loadScene(SceneName name);
+    void setup();
 
-  void allocOutputImage(int width, int height);
+    void loadScene(SceneName name);
 
-  void clearImage();
+    void allocOutputImage(int width, int height);
 
-  void advanceAnimation();
+    void clearImage();
 
-  void render();
+    void advanceAnimation();
 
-  void shadePixel(int circleIndex,
-                  float pixelDist, float rad,
-                  float px, float py, float pz,
-                  float* pixelData);
+    void render();
+
+    void shadePixel(
+        int circleIndex,
+        float pixelCenterX, float pixelCenterY,
+        float px, float py, float pz,
+        float* pixelData);
 };
 
 
